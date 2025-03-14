@@ -59,8 +59,8 @@
     <h1>Genereer afbeelding voor de socials</h1>
 
     <form id="imageForm">
-        <label for="text">Uitspraak/Kreet/Statemen/Enz..</label><br>
-        <textarea id="text" rows="4" cols="50" placeholder="PRO eist ijs..." required></textarea><br><br>
+        <label for="text">Uitspraak/Kreet/Statemen/Meme/Enz..</label><br>
+        <textarea id="text" rows="4" cols="50" placeholder="Wij eisen ijs..." required></textarea><br><br>
 
         <label for="background">Kies een achtergrond:</label><br>
         <select id="background" required>
@@ -79,7 +79,7 @@
     <div id="output">
         <h2>Onderschrift bij afbeelding:</h2>
         <label for="combinedText">Gegenereerde tekst:</label><br>
-        <textarea id="combinedText" placeholder=" #PRO #Oisterwijk #Politiek #iets-wat-altijd-toegevoegd-word"></textarea><br>
+        <textarea id="combinedText" placeholder=" #hastag #plaatsnaam #partij #iets-wat-altijd-toegevoegd-word"></textarea><br>
         <!-- <button id="editTextBtn">Tekst Bewerken</button> -->
     </div>
 
@@ -88,7 +88,7 @@
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const fixedText = " #PRO #Oisterwijk #Politiek #iets-wat-altijd-toegevoegd-word";
+        const fixedText = " #hastag #plaatsnaam #partij #iets-wat-altijd-toegevoegd-word";
         let userText = '';
 
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
