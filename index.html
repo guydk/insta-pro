@@ -60,7 +60,7 @@
 
     <form id="imageForm">
         <label for="text">Uitspraak/Kreet/Statemen/Enz..</label><br>
-        <textarea id="text" rows="4" cols="50" required></textarea><br><br>
+        <textarea id="text" rows="4" cols="50" placeholder="PRO eist ijs..." required></textarea><br><br>
 
         <label for="background">Kies een achtergrond:</label><br>
         <select id="background" required>
@@ -79,7 +79,7 @@
     <div id="output">
         <h2>Onderschrift bij afbeelding:</h2>
         <label for="combinedText">Gegenereerde tekst:</label><br>
-        <textarea id="combinedText" placeholder="PRO eist ijs..."></textarea><br>
+        <textarea id="combinedText" placeholder=" #PRO #Oisterwijk #Politiek #iets-wat-altijd-toegevoegd-word"></textarea><br>
         <!-- <button id="editTextBtn">Tekst Bewerken</button> -->
     </div>
 
@@ -154,7 +154,7 @@
                     ctx.textAlign = 'left';
 
                     const maxWidth = canvas.width - 100;
-                    const lineHeight = 60;
+                    const lineHeight = 160;
                     const startX = 50;
 
                     wrapText(ctx, text, startX, canvas.height, maxWidth, lineHeight);
