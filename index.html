@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Afbeelding Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #output {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        #output label {
+            font-weight: bold;
+        }
+        #output textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        #downloadBtn {
+            display: none;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #downloadBtn:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Maak je eigen Instagram afbeelding</h1>
+
+    <form id="imageForm">
+        <label for="text">Jouw tekst:</label><br>
+        <textarea id="text" rows="4" cols="50" required></textarea><br><br>
+
+        <label for="background">Kies een achtergrond:</label><br>
+        <select id="background" required>
+            <option value="bg1.jpg">Achtergrond 1</option>
+            <option value="bg2.jpg">Achtergrond 2</option>
+            <option value="bg3.jpg">Achtergrond 3</option>
+            <option value="bg4.jpg">Achtergrond 4</option>
+            <option value="bg5.jpg">Achtergrond 5</option>
+        </select><br><br>
+
+        <button type="submit">Genereer Afbeelding</button>
+    </form>
+
+    <canvas id="canvas" width="1080" height="1080"></canvas>
+
+    <div id="output">
+        <h2>Bewerk de tekst voor verdere verwerking:</h2>
+        <label for="combinedText">Samengevoegde Tekst:</label><br>
+        <textarea id="combinedText"></textarea><br>
+        <button id="editTextBtn">Tekst Bewerken</button>
+    </div>
+
+    <button id="downloadBtn">Download Afbeelding</button>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const fixedText = " | Dit is een vaste tekst voor verwerking.";
+        let userText = '';
+
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            const lines = [];
+
+            for (let i = 0; i < words.length; i++) {
+                const testLine = line + words[i] + ' ';
+                const metrics = context.measureText(testLine);
+                const testWidth = metrics.width;
+
+                if (testWidth > maxWidth && i > 0) {
+                    lines.push(line);
+                    line = words[i] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line);
+
+            const totalHeight = lines.length * lineHeight;
+            let startY = canvas.height - 100;
+
+            if (lines.length > 1) {
+                startY -= (totalHeight - lineHeight);
+            }
+
+            lines.forEach((line) => {
+                context.fillText(line, x, startY);
+                startY += lineHeight;
+            });
+        }
+
+        document.getElementById('imageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            userText = document.getElementById('text').value;
+            generateImage(userText);
+
+            document.getElementById('combinedText').value = userText + fixedText;
+            document.getElementById('downloadBtn').style.display = 'block';
+        });
+
+        function generateImage(text) {
+            const background = document.getElementById('background').value;
+            const bgImage = new Image();
+            bgImage.src = 'backgrounds/' + background;
+
+            bgImage.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+
+                const logo = new Image();
+                logo.src = 'logo.png';
+
+                logo.onload = () => {
+                    const logoSize = 150;
+                    ctx.drawImage(logo, 20, 20, logoSize, logoSize);
+
+                    ctx.font = '50px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'left';
+
+                    const maxWidth = canvas.width - 100;
+                    const lineHeight = 60;
+                    const startX = 50;
+
+                    wrapText(ctx, text, startX, canvas.height, maxWidth, lineHeight);
+                };
+            };
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            canvas.toBlob(function(blob) {
+                const link = document.createElement('a');
+                link.download = 'instagram-afbeelding.png';
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                URL.revokeObjectURL(link.href);
+            });
+        });
+    </script>
+
+</body>
+</html>
+h
