@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Afbeelding Generator</title>
+    <title>Socials Afbeelding Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,10 +56,10 @@
 </head>
 <body>
 
-    <h1>Maak je eigen Instagram afbeelding</h1>
+    <h1>Genereer afbeelding voor de socials</h1>
 
     <form id="imageForm">
-        <label for="text">Jouw tekst:</label><br>
+        <label for="text">Uitspraak/Kreet/Statemen/Enz..</label><br>
         <textarea id="text" rows="4" cols="50" required></textarea><br><br>
 
         <label for="background">Kies een achtergrond:</label><br>
@@ -77,10 +77,10 @@
     <canvas id="canvas" width="1080" height="1080"></canvas>
 
     <div id="output">
-        <h2>Bewerk de tekst voor verdere verwerking:</h2>
-        <label for="combinedText">Samengevoegde Tekst:</label><br>
+        <h2>Onderschrift bij afbeelding:</h2>
+        <label for="combinedText">Gegenereerde tekst:</label><br>
         <textarea id="combinedText"></textarea><br>
-        <button id="editTextBtn">Tekst Bewerken</button>
+        <!-- <button id="editTextBtn">Tekst Bewerken</button> -->
     </div>
 
     <button id="downloadBtn">Download Afbeelding</button>
@@ -88,7 +88,7 @@
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const fixedText = " | Dit is een vaste tekst voor verwerking.";
+        const fixedText = "#PRO #Oisterwijk #Politiek #ietswataltijd toegevoegd word";
         let userText = '';
 
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -149,8 +149,8 @@
                     const logoSize = 150;
                     ctx.drawImage(logo, 20, 20, logoSize, logoSize);
 
-                    ctx.font = '50px Arial';
-                    ctx.fillStyle = 'black';
+                    ctx.font = '10px Arial';
+                    ctx.fillStyle = 'white';
                     ctx.textAlign = 'left';
 
                     const maxWidth = canvas.width - 100;
@@ -175,4 +175,4 @@
 
 </body>
 </html>
-h
+
