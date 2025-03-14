@@ -79,7 +79,7 @@
     <div id="output">
         <h2>Onderschrift bij afbeelding:</h2>
         <label for="combinedText">Gegenereerde tekst:</label><br>
-        <textarea id="combinedText"></textarea><br>
+        <textarea id="combinedText" placeholder="PRO eist ijs..."></textarea><br>
         <!-- <button id="editTextBtn">Tekst Bewerken</button> -->
     </div>
 
@@ -88,7 +88,7 @@
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const fixedText = "#PRO #Oisterwijk #Politiek #ietswataltijd toegevoegd word";
+        const fixedText = " #PRO #Oisterwijk #Politiek #ietswataltijd toegevoegd word";
         let userText = '';
 
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -149,7 +149,7 @@
                     const logoSize = 150;
                     ctx.drawImage(logo, 20, 20, logoSize, logoSize);
 
-                    ctx.font = '10px Arial';
+                    ctx.font = '150px Arial';
                     ctx.fillStyle = 'white';
                     ctx.textAlign = 'left';
 
